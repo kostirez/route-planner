@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'route-planner';
+
+  onMapReady(event: any): void {
+    console.log('Map Ready');
+  }
 }
