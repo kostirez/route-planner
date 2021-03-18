@@ -17,13 +17,10 @@ export class GeoJson<T> {
 
     type: string
 
-  };
+  }[];
 
   constructor() {
-  }
-
-  public getProperties(): T {
-    return this.features.properties;
+    this.features = [];
   }
 
 }

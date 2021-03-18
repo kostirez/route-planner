@@ -8,10 +8,18 @@ import {Coordinate} from 'ol/coordinate';
 import {View, Map} from 'ol';
 import {fromLonLat} from 'ol/proj';
 import {ScaleLine, defaults as DefaultControls} from 'ol/control';
+import {GeoJSON} from 'ol/format';
+import VectorSource from 'ol/source/Vector';
 
-// const
-import {baseLayerGroup} from '../const/map-layers';
-import {setVisibleLayer} from '../const/map-layers';
+
+// map services
+import {MapService} from '../services/map.service';
+import {Bike} from '../model/bike';
+import {GeoJson} from '../model/geoJson';
+import {Circle, Fill, Stroke, Style} from 'ol/style';
+import VectorLayer from 'ol/layer/Vector';
+import {BaseMapService} from '../services/base-map/base-map.service';
+import {MapItemService} from '../services/itemServise/map-item.service';
 
 
 @Component({
@@ -33,11 +41,16 @@ export class OlMapComponent implements AfterViewInit {
 
   map: Map;
 
-  constructor(private zone: NgZone) {
+  layers: string[];
+
+  constructor(private zone: NgZone,
+              private baseMapService: BaseMapService,
+              private mapItemService: MapItemService) {
+    this.layers = [];
+
   }
 
   ngAfterViewInit(): void {
-
     if (!this.map) {
       this.zone.runOutsideAngular(() => this.initMap());
     }
@@ -57,9 +70,20 @@ export class OlMapComponent implements AfterViewInit {
         new ScaleLine({}),
       ]),
     });
-    setVisibleLayer(0);
-    this.map.addLayer(baseLayerGroup);
 
+    this.addLayer(this.baseMapService.getBaseMap(), 'base');
+    this.addLayer(this.mapItemService.getBikeLayer(), 'bike');
+    this.addLayer(this.mapItemService.getCarLayer(), 'car');
+
+  }
+
+
+
+  addLayer(layer: VectorLayer, name: string): void {
+    if (this.layers.includes(name)) {
+      return;
+    }
+    this.map.addLayer(layer);
   }
 
 }
