@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {GeoJson} from '../../model/geoJson';
-import {ItemType} from '../../model/item-type';
+import {ItemTypeEnum} from '../../model/item-type.enum';
 import {Params} from '../../model/params';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class HttpService {
   constructor(private http: HttpClient) {
   }
 
-  getMapItems(itemType: ItemType, params: Params = {}): Observable<GeoJson<any>> {
+  getMapItems(itemType: ItemTypeEnum, params: Params = {}): Observable<GeoJson<any>> {
     const httpParams = new HttpParams();
     for (const [key, value] of Object.entries(params)) {
       httpParams.append(key, value);

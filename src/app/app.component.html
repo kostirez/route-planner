@@ -1,7 +1,9 @@
-
-<app-side-menu></app-side-menu>
-<app-ol-map class="map"
-            [center]="[14.4514858, 50.0914172]"
-            [zoom]="12"
-            (mapReady)="onMapReady($event)"
-></app-ol-map>
+<div class="grid-container">
+  <app-side-menu class="menuBox"></app-side-menu>
+  <app-search class="headerBox"></app-search>
+  <app-ol-map class="mapBox map"
+              [center]="[14.4514858, 50.0914172]"
+              [zoom]="12"
+              (mapReady)="onMapReady($event)"
+  ></app-ol-map>
+</div>

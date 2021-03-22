@@ -1,0 +1,64 @@
+<mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+  <mat-button-toggle (click)="changeMapType(0)">All</mat-button-toggle>
+  <mat-button-toggle (click)="changeMapType(1)">Cycle</mat-button-toggle>
+  <mat-button-toggle (click)="changeMapType(2)">Cars</mat-button-toggle>
+  <mat-button-toggle (click)="changeMapType(3)">Public Transport</mat-button-toggle>
+</mat-button-toggle-group>
+
+<div>
+  <ng-container [ngSwitch]="mapType">
+    <div *ngSwitchCase="0">
+      <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin"
+                        [checked]="allComplete"
+                        [color]="bikes.color"
+                        [indeterminate]="someComplete()"
+                        (change)="setAll($event.checked)">
+            {{bikes.name}}
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            <li *ngFor="let subtask of bikes.subtasks">
+              <mat-checkbox [(ngModel)]="subtask.completed"
+                            [color]="subtask.color"
+                            (ngModelChange)="updateAllComplete()">
+                {{subtask.name}}
+              </mat-checkbox>
+            </li>
+          </ul>
+        </span>
+      </section>
+    </div>
+    <div *ngSwitchCase="1">...</div>
+    <div *ngSwitchCase="2">...</div>
+  </ng-container>
+</div>
+
+
+<div>
+  <p>Bikes</p>
+  <button (click)="loadBikes()">load</button>
+  <button (click)="showBikes()">show</button>
+  <button (click)="hideBikes()">hide</button>
+</div>
+
+<div>
+  <p>cars</p>
+  <button (click)="loadCars()">load</button>
+  <button (click)="showCars()">show</button>
+  <button (click)="hideCars()">hide</button>
+</div>
+
+<div>
+  <p>Base maps</p>
+  <div class="base-map-btn"
+       (click)="changeMap(1)">
+    <img src="/assets/pic/osm_map_pic.png">
+  </div>
+  <div class="base-map-btn"
+       (click)="changeMap(3)">
+    <img [src]="'/assets/pic/stamen_map_pic.png'">
+  </div>
+</div>
