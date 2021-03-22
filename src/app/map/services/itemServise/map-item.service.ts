@@ -5,7 +5,7 @@ import {Car} from '../../model/car';
 import VectorLayer from 'ol/layer/Vector';
 import {OlFuncService} from '../ol-func.service';
 import {HttpService} from '../httpService/http.service';
-import {ItemType} from '../../model/item-type';
+import {ItemTypeEnum} from '../../model/item-type.enum';
 
 
 @Injectable({
@@ -33,7 +33,7 @@ export class MapItemService {
 
 
   loadCars(): void {
-    this.carItems.loadItems(ItemType.CAR);
+    this.carItems.loadItems(ItemTypeEnum.CAR);
   }
 
   addCars(): void {
@@ -41,7 +41,7 @@ export class MapItemService {
   }
 
   loadBikes(): void {
-    this.bikeItems.loadItems(ItemType.BIKE);
+    this.bikeItems.loadItems(ItemTypeEnum.BIKE);
   }
 
   addBikes(): void {

@@ -1,1 +1,7 @@
-<div class="map-container" id="map"></div>
+<div class="map-container" id="map">
+
+</div>
+<div *ngIf="showBox" class="overlay-container" id="overlay">
+  <span class="overlay-text" id="feature-company">sdfsdfs</span>
+  <app-overlay-box  [overlayInfo]="overlayInfo"></app-overlay-box>
+</div>

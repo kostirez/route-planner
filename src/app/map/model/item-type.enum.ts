@@ -1,4 +1,4 @@
-export enum ItemType {
+export enum ItemTypeEnum {
   BIKE = 'sharedbikes',
   CAR = 'sharedcars'
 }

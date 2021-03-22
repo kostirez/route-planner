@@ -4,7 +4,7 @@ import {GeoJSON} from 'ol/format';
 import VectorSource from 'ol/source/Vector';
 import {OlFuncService} from '../ol-func.service';
 import {HttpService} from '../httpService/http.service';
-import {ItemType} from '../../model/item-type';
+import {ItemTypeEnum} from '../../model/item-type.enum';
 
 
 export class MapItems<T> {
@@ -72,7 +72,7 @@ export class MapItems<T> {
   //   this.source.addFeatures(features);
   // }
 
-  loadItems(type: ItemType): void {
+  loadItems(type: ItemTypeEnum): void {
     this.httpService.getMapItems(type)
       .subscribe(items => {
         this.items = items;
