@@ -2,7 +2,7 @@ export interface Geometry {
 
   type: string;
 
-  coordinates: [number, number];
+  coordinates: [number, number][];
 
 }
 

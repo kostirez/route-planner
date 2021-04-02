@@ -1,4 +1,5 @@
 export enum ItemTypeEnum {
   BIKE = 'sharedbikes',
-  CAR = 'sharedcars'
+  CAR = 'sharedcars',
+  STREET = 'street'
 }

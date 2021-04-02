@@ -85,6 +85,7 @@ export class OlMapComponent implements AfterViewInit {
     this.addLayer(this.baseMapService.getBaseMap(), 'base');
     this.addLayer(this.mapItemService.getBikeLayer(), 'bike');
     this.addLayer(this.mapItemService.getCarLayer(), 'car');
+    this.addLayer(this.mapItemService.getCarLayer(), 'street');
 
     this.initOverlay();
   }

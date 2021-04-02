@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {GeoJson} from '../../model/geoJson';
+import {Observable, of} from 'rxjs';
+import {GeoJson, Geometry} from '../../model/geoJson';
 import {ItemTypeEnum} from '../../model/item-type.enum';
 import {Params} from '../../model/params';
+import {ulice} from '../../../../assets/ulice';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,9 @@ export class HttpService {
   }
 
   getMapItems(itemType: ItemTypeEnum, params: Params = {}): Observable<GeoJson<any>> {
+    if (itemType === ItemTypeEnum.STREET) {
+      return this.getStreets();
+    }
     const httpParams = new HttpParams();
     for (const [key, value] of Object.entries(params)) {
       httpParams.append(key, value);
@@ -33,5 +37,17 @@ export class HttpService {
   //   return this.http.get<GeoJson<any>[]>(this)
   // }
 
+  getStreets(): any {
+    const geo = new GeoJson<any>();
+    ulice.forEach(ul => {
+      const cor: Geometry = {type: 'LineString', coordinates: []};
+      ul.geometry.coordinates.forEach(c => {
+        cor.coordinates.push([c[0], c[1]]);
+      });
+      geo.features.push({geometry: cor, properties: ul.properties, type: ul.type});
+    });
+    const a =  of(geo);
+    return a;
+  }
 
 }

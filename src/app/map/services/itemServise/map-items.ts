@@ -5,6 +5,7 @@ import VectorSource from 'ol/source/Vector';
 import {OlFuncService} from '../ol-func.service';
 import {HttpService} from '../httpService/http.service';
 import {ItemTypeEnum} from '../../model/item-type.enum';
+import {ParamsTree} from '../../model/params-tree';
 
 
 export class MapItems<T> {
@@ -14,6 +15,10 @@ export class MapItems<T> {
   private items: GeoJson<T>;
 
   private source: VectorSource;
+
+  private paramsTree: ParamsTree;
+
+  private type: string;
 
   constructor(private olFuncService: OlFuncService,
               private httpService: HttpService) {
@@ -26,23 +31,29 @@ export class MapItems<T> {
   }
 
   initLayer(): void {
-    console.log('init layer', typeof this.items);
     this.source = this.olFuncService.getVectorSource(this.items);
-    const styles = this.olFuncService.getCircleStyle('blue');
+    const styles = this.olFuncService.getImage();
     this.layer = new VectorLayer({
       source: this.source,
-      style: (feature) => {
-        return styles[feature.getGeometry().getType()];
-      },
+      style: styles
+      // (feature) => {
+      //   return styles[feature.getGeometry().getType()];
+      // },
     });
   }
 
-  addAll(): void {
-    let features;
-    if ( this.items.features.length !== 0) {
-      features = new GeoJSON().readFeatures(this.items, {featureProjection: 'EPSG:3857'});
+  private getFeatures(): any {
+    if (this.items.features.length !== 0) {
+      return new GeoJSON().readFeatures(this.items, {featureProjection: 'EPSG:3857'});
     } else {
-      console.error('empty items');
+      console.error('empty items', this.items);
+      return;
+    }
+  }
+
+  addAll(): void {
+    const features = this.getFeatures();
+    if (!features) {
       return;
     }
     console.log('adding features', features);
@@ -51,6 +62,14 @@ export class MapItems<T> {
 
   removeAll(): void {
     this.source.clear();
+  }
+
+  setLayer(filter: ParamsTree): void {
+    const features = this.getFeatures();
+    if (!features) {
+      return;
+    }
+    console.log(features);
   }
 
   // setLayer(params: any): void {
@@ -76,8 +95,29 @@ export class MapItems<T> {
     this.httpService.getMapItems(type)
       .subscribe(items => {
         this.items = items;
-        console.log('items', this.items);
+        this.type = type;
+        console.log('items', typeof this.items);
+        // this.setParamsTree('company');
       });
+    console.log('items', this.items);
+  }
+
+  setParamsTree(param: string): void {
+    let categories: { categoryName: string, count: number }[];
+    categories = [];
+    // categories.find(aa => 2 > 2);
+    const iterator = this.items.features.values();
+    const values = [];
+    for (const value of iterator) {
+      const name = value.properties[param].name;
+      if (categories.filter(e => e.categoryName === name).length > 0) {
+        const index = categories.findIndex(category => name === category.categoryName);
+        categories[index].count += 1;
+      } else {
+        categories.push({categoryName: name, count: 1});
+      }
+    }
+    console.log('categories: ', categories);
   }
 
   // private satisfiesParams(params: any, item: GeoJson<T>): boolean {

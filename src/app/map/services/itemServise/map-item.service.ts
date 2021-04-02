@@ -17,10 +17,13 @@ export class MapItemService {
 
   private carItems: MapItems<Car>;
 
+  private streetItems: MapItems<any>;
+
   constructor(private olFuncService: OlFuncService,
               private httpService: HttpService) {
     this.bikeItems = new MapItems<Bike>(olFuncService, httpService);
     this.carItems = new MapItems<Car>(olFuncService, httpService);
+    this.streetItems = new MapItems<any>(olFuncService, httpService);
   }
 
   getBikeLayer(): VectorLayer {
@@ -56,4 +59,21 @@ export class MapItemService {
     this.carItems.removeAll();
   }
 
+
+
+  addStreet(): void {
+    this.streetItems.addAll();
+  }
+
+  hideStreet(): void {
+    this.streetItems.removeAll();
+  }
+
+  loadStreet(): void {
+    this.bikeItems.loadItems(ItemTypeEnum.STREET);
+  }
+
+  getStreetLayer(): VectorLayer {
+    return this.streetItems.getLayer();
+  }
 }

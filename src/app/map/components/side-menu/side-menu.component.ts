@@ -2,14 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {BaseMapService} from '../../services/base-map/base-map.service';
 import {MapItemService} from '../../services/itemServise/map-item.service';
 import {MapMode} from '../../model/map-mode.enum';
-import {ThemePalette} from '@angular/material/core';
+import {ParamsTree} from '../../model/params-tree';
 
-export interface Task {
-  name: string;
-  completed: boolean;
-  color: ThemePalette;
-  subtasks?: Task[];
-}
+
 
 @Component({
   selector: 'app-side-menu',
@@ -20,26 +15,15 @@ export class SideMenuComponent implements OnInit {
 
   mapType: MapMode;
 
-  bikes: Task;
+  bikes: ParamsTree;
 
-  allComplete: boolean = false;
+  allComplete = false;
 
   constructor(private baseMapService: BaseMapService,
               private mapItemService: MapItemService) {
   }
 
   ngOnInit(): void {
-    this.bikes = {
-      name: 'Bikes',
-      completed: false,
-      color: 'primary',
-      subtasks: [
-        {name: 'company1', completed: false, color: 'primary'},
-        {name: 'company2', completed: false, color: 'accent'},
-        {name: 'company3', completed: false, color: 'warn'}
-      ]
-    };
-
     this.mapType = MapMode.BikeMode;
   }
 
@@ -47,24 +31,24 @@ export class SideMenuComponent implements OnInit {
 
 
 
-  updateAllComplete(): void {
-    this.allComplete = this.bikes.subtasks != null && this.bikes.subtasks.every(t => t.completed);
-  }
-
-  someComplete(): boolean {
-    if (this.bikes.subtasks == null) {
-      return false;
-    }
-    return this.bikes.subtasks.filter(t => t.completed).length > 0 && !this.allComplete;
-  }
-
-  setAll(completed: boolean): void {
-    this.allComplete = completed;
-    if (this.bikes.subtasks == null) {
-      return;
-    }
-    this.bikes.subtasks.forEach(t => t.completed = completed);
-  }
+  // updateAllComplete(): void {
+  //   this.allComplete = this.bikes.subtasks != null && this.bikes.subtasks.every(t => t.completed);
+  // }
+  //
+  // someComplete(): boolean {
+  //   if (this.bikes.subtasks == null) {
+  //     return false;
+  //   }
+  //   return this.bikes.subtasks.filter(t => t.completed).length > 0 && !this.allComplete;
+  // }
+  //
+  // setAll(completed: boolean): void {
+  //   this.allComplete = completed;
+  //   if (this.bikes.subtasks == null) {
+  //     return;
+  //   }
+  //   this.bikes.subtasks.forEach(t => t.completed = completed);
+  // }
 
 
   changeMap(mapNum: number): void {
@@ -98,5 +82,17 @@ export class SideMenuComponent implements OnInit {
   changeMapType(num: number): void {
     this.mapType = MapMode[MapMode[num]];
     console.log('type: ', this.mapType);
+  }
+
+  loadStreets(): void {
+    this.mapItemService.loadStreet();
+  }
+
+  showStreets():void {
+    this.mapItemService.addStreet();
+  }
+
+  hideStreets(): void {
+    this.mapItemService.hideStreet();
   }
 }

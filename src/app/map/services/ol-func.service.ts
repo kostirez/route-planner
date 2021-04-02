@@ -3,10 +3,9 @@ import VectorLayer from 'ol/layer/Vector';
 import {MapService} from '../services/map.service';
 import {Bike} from '../model/bike';
 import {GeoJson} from '../model/geoJson';
-import {Circle, Fill, Stroke, Style} from 'ol/style';
+import {Circle, Fill, Stroke, Style, Icon} from 'ol/style';
 import {GeoJSON} from 'ol/format';
 import VectorSource from 'ol/source/Vector';
-
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +38,26 @@ export class OlFuncService {
       })
     };
     return styles;
+  }
+
+  getImage(): void{
+    const fill = new Fill({
+      color: 'rgb(227,20,20,1)'
+    });
+    const stroke = new Stroke({
+      color: '#3399CC',
+      width: 1.25
+    });
+    return new Style({
+      image: new Icon({
+        // anchor: [0.5, 46],
+        // anchorXUnits: 'fraction',
+        // anchorYUnits: 'pixels',
+        src: 'assets/pic/bike.png',
+        color: 'rgb(227,20,20,1)',
+      }),
+
+
+    });
   }
 }
