@@ -16,7 +16,6 @@ import { SearchComponent } from './view/components/search/search.component';
 import { MapTypeComponent } from './view/components/map-type/map-type.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import { RoutingMenuComponent } from './view/components/routing-menu/routing-menu.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +24,6 @@ import { RoutingMenuComponent } from './view/components/routing-menu/routing-men
     OverlayBoxComponent,
     SearchComponent,
     MapTypeComponent,
-    RoutingMenuComponent
   ],
   imports: [
     BrowserModule,
