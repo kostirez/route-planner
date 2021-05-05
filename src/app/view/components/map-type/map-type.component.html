@@ -1,0 +1,15 @@
+<button class="map-type-btn"
+        *ngIf="!show"
+        (click)="show=!show">
+  <img src="/assets/pic/map.png">
+</button>
+<div *ngIf="show">
+  <div class="base-map-btn"
+       (click)="changeMap(1)">
+    <img src="/assets/pic/osm_map_pic.png">
+  </div>
+  <div class="base-map-btn"
+       (click)="changeMap(3)">
+    <img [src]="'/assets/pic/stamen_map_pic.png'">
+  </div>
+</div>

@@ -1,0 +1,24 @@
+{
+  "Bike": "Bike",
+  "CyclePath":  "Bicycle path",
+  "BikeParking": "Bicycle stand",
+  "Car":  "Car",
+  "ParkingMachines":  "Parking machine",
+  "ParkingLot":  "Parking lot",
+  "PaidParking":  "Paid parking",
+  "ProhibitedParking":  "Prohibited parking",
+  "ZTP":  "Parking for disabled",
+  "streets": "Streets",
+  "MHDStops": "Public transport stop",
+  "PIDLines": "Public transport lines",
+  "filtersHide": "Hide filters",
+  "filtersShow": "Show filters",
+  "search": "Search",
+  "from": "From",
+  "to": "To",
+  "route": {
+    "plan": "Plan route",
+    "from": "From here",
+    "to": "To here"
+  }
+}

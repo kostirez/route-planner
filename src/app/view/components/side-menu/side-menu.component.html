@@ -1,0 +1,35 @@
+<mat-button-toggle-group class="btn-group" [value]="mapType"
+                         name="fontStyle" aria-label="Font Style">
+  <mat-button-toggle class="nav-btn"
+                     *ngFor="let mode of modes; index as i"
+                     (click)="changeMapType(i)"
+                     [value]="i">
+    <img [src]="'./assets/pic/' + mode.name + '.png'">
+  </mat-button-toggle>
+</mat-button-toggle-group>
+
+<div class="checkboxes">
+  <!--  <h2>{{modes[mapType].name}}</h2>-->
+  <section class="example-section" *ngFor="let layerName of modes[mapType].layers">
+    <span class="example-list-section">
+        <mat-checkbox class="example-margin"
+                      [checked]="getLayersParams(layerName).completed"
+                      [indeterminate]="someComplete(layerName)"
+                      (change)="setAll($event.checked, layerName)">
+            <h2>{{getLayersParams(layerName).name | translate}}</h2>
+        </mat-checkbox>
+      <img class="icon" [src]="'./assets/pic/' + layerName+ '.png'" (click)="setShow(layerName)">
+    </span>
+    <span class="example-list-section" *ngIf="showSubtask(layerName)">
+              <ul>
+                <li *ngFor="let subtask of getLayersParams(layerName).subtasks">
+                  <mat-checkbox [(ngModel)]="subtask.completed"
+                                (ngModelChange)="updateAllComplete(layerName)">
+                    {{subtask.name | translate}}
+                  </mat-checkbox>
+                </li>
+              </ul>
+            </span>
+  </section>
+</div>
+

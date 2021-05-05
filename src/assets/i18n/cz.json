@@ -1,0 +1,24 @@
+{
+  "Bike": "Sdílená kola",
+  "CyclePath":  "Cyklostezky",
+  "BikeParking": "Stojany na kola",
+  "Car":  "Sdílená auta",
+  "ParkingMachines":  "Parkomaty",
+  "ParkingLot":  "Parkoviště",
+  "PaidParking":  "Placené zóny",
+  "ProhibitedParking":  "Zákaz parkování",
+  "ZTP":  "ZTP",
+  "streets": "Ulice",
+  "MHDStops": "Zastávky MHD",
+  "PIDLines": "linky MHD",
+  "filtersHide": "schovat filtry",
+  "filtersShow": "zobrazit filtry",
+  "search": "Hledat",
+  "from": "Z",
+  "to": "Do",
+  "route": {
+    "plan": "Naplánovat trasu",
+    "from": "odtud",
+    "to": "sem"
+  }
+}

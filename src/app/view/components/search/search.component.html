@@ -1,0 +1,27 @@
+<div>
+  <button (click)="search()">{{'search' | translate}}</button>
+  <div class="search-box">
+    <div>
+      <div class="search-row">
+        <mat-form-field class="example-full-width">
+          <mat-label>{{'from' | translate}}</mat-label>
+          <input matInput placeholder="Ex. Museum" [(ngModel)]="from">
+        </mat-form-field>
+        <img class="position-img" (click)="setFrom('My location')"
+             [src]="'./assets/pic/MyLocation.png'">
+      </div>
+      <div class="search-row">
+        <mat-form-field class="example-full-width">
+          <mat-label>{{'to' | translate}}</mat-label>
+          <input matInput placeholder="Ex. Vystaviste" [(ngModel)]="to">
+        </mat-form-field>
+        <img class="position-img" (click)="setTo('My location')"
+             [src]="'./assets/pic/MyLocation.png'">
+      </div>
+    </div>
+    <div class="position-img">
+      <img class="position-img" (click)="switch()" [src]="'./assets/pic/back-and-forth.png'">
+    </div>
+  </div>
+
+</div>

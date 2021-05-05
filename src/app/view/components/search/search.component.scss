@@ -1,0 +1,36 @@
+.example-form {
+  min-width: 150px;
+  max-width: 300px;
+  width: 100%;
+}
+
+.example-full-width {
+
+}
+//.searchText {
+//  display: inline;
+//  padding: 20px;
+//}
+.position-img{
+  margin: auto;
+  padding: 5px;
+}
+.search-box{
+  display: grid;
+  grid-template-columns: auto 40px;
+  margin: 10px;
+}
+
+.search-row {
+  display: grid;
+  grid-template-columns: auto 30px;
+  width: 240px;
+}
+
+@media only screen and (orientation: portrait) {
+  .search-box {
+    width: 280px;
+    margin: auto;
+  }
+}
+

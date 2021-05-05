@@ -1,0 +1,16 @@
+<div *ngIf="showDetail" class="box" (click)="getData()">
+  <img [src]="'./assets/pic/' + overlayInfo?.type+ '.png'">
+  <p>{{overlayInfo?.type | translate}}</p>
+  <p>{{overlayInfo?.name}}</p>
+  <div *ngIf="overlayInfo.company">
+    <p>{{overlayInfo?.company?.name}} </p>
+    <a [href]="'www.' + overlayInfo.company.web">{{overlayInfo?.company?.web}} </a>
+  </div>
+</div>
+<div>
+  <p>{{'route.plan' | translate}}</p>
+  <button (click)="setFrom()">{{'route.from' | translate}}</button>
+  <button (click)="setTo()">{{'route.to' | translate}}</button>
+</div>
+
+<div class="box" *ngIf="!isDefined()">Undefined</div>

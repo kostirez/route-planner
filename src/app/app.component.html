@@ -1,9 +1,22 @@
-<div class="grid-container">
-  <app-side-menu class="menuBox"></app-side-menu>
-  <app-search class="headerBox"></app-search>
-  <app-ol-map class="mapBox map"
-              [center]="[14.4514858, 50.0914172]"
-              [zoom]="12"
-              (mapReady)="onMapReady($event)"
-  ></app-ol-map>
+
+<app-ol-map class="mapBox map"
+            [center]="[14.4514858, 50.0914172]"
+            [zoom]="14"
+            (mapReady)="onMapReady($event)">
+</app-ol-map>
+
+<div class="control-box">
+  <app-search class="header-box"></app-search>
+  <div *ngIf="!showFilter" class="show-filter"
+       (click)="openFilters(true)">{{'filtersShow' | translate}}
+  </div>
+  <app-side-menu [@expandCollapse] = 'openCloseAnim' class="menu-box"></app-side-menu>
+  <div class="show-filter"
+       *ngIf="showFilter"
+       (click)="openFilters(false)">{{'filtersHide' | translate}}
+  </div>
 </div>
+
+
+<app-map-type class="map-type"></app-map-type>
+
