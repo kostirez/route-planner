@@ -13,16 +13,16 @@
   <section class="example-section" *ngFor="let layerName of modes[mapType].layers">
     <span class="example-list-section">
         <mat-checkbox class="example-margin"
-                      [checked]="getLayersParams(layerName).completed"
+                      [checked]="getCheckBoxTree(layerName).allComplete"
                       [indeterminate]="someComplete(layerName)"
                       (change)="setAll($event.checked, layerName)">
-            <h2>{{getLayersParams(layerName).name | translate}}</h2>
+            <h2>{{getCheckBoxTree(layerName).name | translate}}</h2>
         </mat-checkbox>
       <img class="icon" [src]="'./assets/pic/' + layerName+ '.png'" (click)="setShow(layerName)">
     </span>
     <span class="example-list-section" *ngIf="showSubtask(layerName)">
               <ul>
-                <li *ngFor="let subtask of getLayersParams(layerName).subtasks">
+                <li *ngFor="let subtask of getCheckBoxTree(layerName).subtasks">
                   <mat-checkbox [(ngModel)]="subtask.completed"
                                 (ngModelChange)="updateAllComplete(layerName)">
                     {{subtask.name | translate}}

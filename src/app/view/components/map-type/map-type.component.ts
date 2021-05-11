@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {MapMode} from '../../model/map-mode.enum';
-import {BaseMapService} from '../../services/base-map-service/base-map.service';
+import {MapMode} from '../../../model/map-mode.enum';
+import {BaseMapService} from '../../../services/base-map-service/base-map.service';
 
 @Component({
   selector: 'app-map-type',

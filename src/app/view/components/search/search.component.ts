@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {GeoLocationService} from '../../services/geo-location.service/geo-location.service';
-import {RoutePlanningService} from '../../services/route-planning.service';
+import {GeoLocationService} from '../../../services/geo-location.service/geo-location.service';
+import {RoutePlanningService} from '../../../services/route-plannig-service/route-planning.service';
 
 @Component({
   selector: 'app-search',
