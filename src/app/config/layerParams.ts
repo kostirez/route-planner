@@ -1,4 +1,4 @@
-import {ILayerParams, IMode} from '../interfaces/ILayerParams';
+import {ILayerParams, IMode} from '../model/interfaces/ILayerParams';
 
 export const mode: IMode[] = [
   {
@@ -13,10 +13,10 @@ export const mode: IMode[] = [
       'PaidParking',
       'ProhibitedParking',
       'ZTP',
-      'streets',
+      // 'streets',
       'MHDStops',
       'PIDLines',
-      'chodci'
+      // 'chodci'
     ]
   },
   {

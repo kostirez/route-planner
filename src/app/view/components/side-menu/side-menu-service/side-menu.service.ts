@@ -7,7 +7,7 @@ import {IFilter, IItemsFilter} from '../../../../model/interfaces/IItemsFilter';
 })
 export class SideMenuService {
 
-  filterState: Subject<IFilter>;
+  private filterState: Subject<IFilter>;
 
   constructor() {
     this.filterState = new Subject<IFilter>();

@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import {OlFuncService} from './ol-func-service/ol-func.service';
+import {OlFuncService} from '../ol-func-service/ol-func.service';
 import {GeoJSON} from 'ol/format';
 import {fromLonLat} from 'ol/proj';
-import {RestAPIService} from '../../model/database-service/rest-api.service';
+import {RestAPIService} from '../database-service/rest-api.service';
 
 
 @Injectable({

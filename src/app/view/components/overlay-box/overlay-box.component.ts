@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {OverlayInfo} from '../../model/overlay-info';
-import {RoutePlanningService} from '../../services/route-planning.service';
+import {OverlayInfo} from '../../../model/overlay-info';
+import {RoutePlanningService} from '../../../services/route-plannig-service/route-planning.service';
 
 @Component({
   selector: 'app-overlay-box',

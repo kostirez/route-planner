@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Bike} from '../../view/model/bike';
-import {Car} from '../../view/model/car';
+import {Bike} from '../../model/bike';
+import {Car} from '../../model/car';
 import VectorLayer from 'ol/layer/Vector';
-import {OlFuncService} from '../../view/services/ol-func-service/ol-func.service';
-import {ItemTypeEnum} from '../../view/model/item-type.enum';
+import {OlFuncService} from '../ol-func-service/ol-func.service';
+import {ItemTypeEnum} from '../../model/item-type.enum';
 // import {GeoFiltr} from '../../interfaces/IgeoFiltr';
 
 

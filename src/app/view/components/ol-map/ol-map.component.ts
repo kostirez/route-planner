@@ -14,12 +14,13 @@ import Overlay from 'ol/Overlay';
 // map services
 
 import VectorLayer from 'ol/layer/Vector';
-import {BaseMapService} from '../../services/base-map-service/base-map.service';
-import {OverlayInfo} from '../../model/overlay-info';
+import {BaseMapService} from '../../../services/base-map-service/base-map.service';
+import {OverlayInfo} from '../../../model/overlay-info';
 import {LayerControllerService} from '../../../controller/layer-controller.service';
 import {toLonLat} from 'ol/proj';
-import {GeoLocationService} from '../../services/geo-location.service/geo-location.service';
-import {RoutePlanningService} from '../../services/route-planning.service';
+import {GeoLocationService} from '../../../services/geo-location.service/geo-location.service';
+import {RoutePlanningService} from '../../../services/route-plannig-service/route-planning.service';
+import {MapStateService} from './service/map-state.service';
 
 @Component({
   selector: 'app-ol-map',
@@ -54,7 +55,8 @@ export class OlMapComponent implements AfterViewInit {
               private baseMapService: BaseMapService,
               private layerControllerService: LayerControllerService,
               private geoLocationService: GeoLocationService,
-              private routePlanningService: RoutePlanningService) {
+              private routePlanningService: RoutePlanningService,
+              private mapStateService: MapStateService) {
     this.layers = [];
     this.overlayInfo = new OverlayInfo();
   }
@@ -102,7 +104,9 @@ export class OlMapComponent implements AfterViewInit {
     this.map.on('moveend', () => {
       this.center = toLonLat(this.view.getCenter());
       this.zoom = this.view.getZoom();
-      this.layerControllerService.setMapState(this.zoom, this.center);
+      this.mapStateService.changeCoords(this.center);
+      this.mapStateService.changeZoom(this.zoom);
+      // this.layerControllerService.setMapState(this.zoom, this.center);
     });
 
     this.initCurrentPosition();

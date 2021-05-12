@@ -97,8 +97,9 @@ export class SideMenuComponent implements OnInit {
   }
 
   getIfilterFromTask(task: Task): IFilter {
+    console.log('iiiiiiiiiiiiiiiiiiiii', task);
     const ret = {
-      name: null,
+      name: task.name,
       subnames: []
     };
     task.subtasks.forEach((subT) => {
@@ -106,8 +107,8 @@ export class SideMenuComponent implements OnInit {
         ret.subnames.push(subT.name);
       }
     });
-    if (ret.subnames.length > 0) {
-      ret.name = task.name;
+    if (task.subtasks.length === 0 && task.allComplete) {
+      ret.subnames.push(task.name);
     }
     console.log('ret', ret);
     return ret;
@@ -123,23 +124,6 @@ export class SideMenuComponent implements OnInit {
 
   filterChange(filter: IFilter): void {
     this.sideMenuService.changeFilter(filter);
-    //   const filterArray = this.checkBoxTree.map(task => {
-    //     const subnamess = task.subtasks.map(subtask => {
-    //       if (subtask.completed) {
-    //         return subtask.name;
-    //       }
-    //     }).filter(text => text);
-    //
-    //     if (subnamess.length === 0 && !task.allComplete) {
-    //       return null;
-    //     }
-    //     return {
-    //       name: task.name,
-    //       subnames: subnamess
-    //     };
-    //   }).filter(text => text);
-    //   console.log('filter', filterArray);
-    //   this.layerControllerService.setItemsFilter({filter: filterArray});
   }
 
 }

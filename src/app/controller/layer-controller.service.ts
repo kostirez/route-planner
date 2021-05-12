@@ -2,13 +2,15 @@ import {Injectable} from '@angular/core';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import {Layer} from './layer';
-import {ILayerParams} from '../interfaces/ILayerParams';
-import {OlFuncService} from '../view/services/ol-func-service/ol-func.service';
-import {GolemioService} from '../model/database-service/golemio.service';
-import {ICircleFilter} from '../interfaces/ICircleFilter';
-import {ICoordinates} from '../interfaces/ICoordinates';
-import {IItemsFilter} from '../interfaces/IItemsFilter';
-import {RestAPIService} from '../model/database-service/rest-api.service';
+import {ILayerParams} from '../model/interfaces/ILayerParams';
+import {OlFuncService} from '../services/ol-func-service/ol-func.service';
+import {GolemioService} from '../services/database-service/golemio.service';
+import {ICircleFilter} from '../model/interfaces/ICircleFilter';
+import {ICoordinates} from '../model/interfaces/ICoordinates';
+import {IItemsFilter} from '../model/interfaces/IItemsFilter';
+import {RestAPIService} from '../services/database-service/rest-api.service';
+import {SideMenuService} from '../view/components/side-menu/side-menu-service/side-menu.service';
+import {MapStateService} from '../view/components/ol-map/service/map-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +27,9 @@ export class LayerControllerService {
 
   constructor(private olFuncService: OlFuncService,
               private golemioService: GolemioService,
-              private restAPIService: RestAPIService ) {
+              private restAPIService: RestAPIService,
+              private sideMenuService: SideMenuService,
+              private mapStateService: MapStateService) {
   }
 
   getLayer(name: string): Layer<any> {
@@ -46,7 +50,7 @@ export class LayerControllerService {
     this.layers = [];
     this.itemsFilter = {filter: []};
     layerParams.forEach((parm) => {
-      this.layers.push(new Layer(parm, this.olFuncService, this.golemioService, this.restAPIService));
+      this.layers.push(new Layer(parm, this.olFuncService, this.golemioService, this.restAPIService, this.sideMenuService, this.mapStateService));
     });
     console.log('layers are ready');
   }
@@ -55,31 +59,31 @@ export class LayerControllerService {
   //   this.getLayer(name).setData(geoFilter);
   // }
 
-  setMapState(zoom: number = this.mapZoom, center: [number, number] = this.mapCenter): void {
-    this.mapZoom = zoom;
-    this.mapCenter = center;
-    console.log('setMapState', this.mapZoom, this.mapCenter);
-    this.setFilters();
-  }
+  // setMapState(zoom: number = this.mapZoom, center: [number, number] = this.mapCenter): void {
+  //   this.mapZoom = zoom;
+  //   this.mapCenter = center;
+  //   console.log('setMapState', this.mapZoom, this.mapCenter);
+  //   this.setFilters();
+  // }
 
-  setItemsFilter(filter: IItemsFilter): void {
-    this.itemsFilter = filter;
-    console.log('filter', filter);
-    this.setFilters();
-  }
+  // setItemsFilter(filter: IItemsFilter): void {
+  //   this.itemsFilter = filter;
+  //   console.log('filter', filter);
+  //   this.setFilters();
+  // }
 
-  setFilters(): void {
-    this.layers.forEach((layer) => {
-      const filter = this.itemsFilter.filter
-        .find((f) => f.name === layer.name);
-      const circleFilter: ICircleFilter = {coordinates: this.mapCenter, radius: this.getRadius()};
-      layer.setFilter(filter, circleFilter);
-    });
-  }
-
-  getRadius(): number {
-    return 100000 / this.mapZoom;
-  }
+  // setFilters(): void {
+  //   this.layers.forEach((layer) => {
+  //     const filter = this.itemsFilter.filter
+  //       .find((f) => f.name === layer.name);
+  //     const circleFilter: ICircleFilter = {coordinates: this.mapCenter, radius: this.getRadius()};
+  //     layer.setFilter(filter, circleFilter);
+  //   });
+  // }
+  //
+  // getRadius(): number {
+  //   return 100000 / this.mapZoom;
+  // }
 
   getLayerNameById(id): string{
     return this.layers.find((layer) => layer.getOl_uid() === id).name;

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, of, Subject} from 'rxjs';
-import {GeoJson} from '../../view/model/geoJson';
-import {ICircleFilter, IMyApiFilter} from '../../interfaces/ICircleFilter';
+import {GeoJson} from '../../model/geoJson';
+import {ICircleFilter, IMyApiFilter} from '../../model/interfaces/ICircleFilter';
 
 @Injectable({
   providedIn: 'root'

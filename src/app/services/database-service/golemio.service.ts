@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {GeoJson} from '../../view/model/geoJson';
-import {IGolemioFilter} from '../../interfaces/IGolemioFilter';
-import {Car} from '../../view/model/car';
-import {Bike} from '../../view/model/bike';
-import {ICircleFilter} from '../../interfaces/ICircleFilter';
+import {GeoJson} from '../../model/geoJson';
+import {IGolemioFilter} from '../../model/interfaces/IGolemioFilter';
+import {Car} from '../../model/car';
+import {Bike} from '../../model/bike';
+import {ICircleFilter} from '../../model/interfaces/ICircleFilter';
 
 @Injectable({
   providedIn: 'root'
