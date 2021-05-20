@@ -45,7 +45,7 @@ export class Layer<T> {
     this.itemDatabase = new ItemDatabase(golemioService, restAPIService, sideMenuService, mapStateService,
       this.params.searchUrl, this.params.database, this.name);
     this.itemDatabase.getItems().subscribe((items) => {
-      console.log('goisdugfoaiwugfoaiw');
+      console.log('goisdugfoaiwugfoaiw', items);
       this.removeAll();
       this.addItems(items);
       // this.addItems(this.findNewItems(items));
@@ -99,7 +99,11 @@ export class Layer<T> {
   // }
 
   addItems(items: GeoJson<any>): void {
-    console.log('items', items);
+    console.log('adding items', items);
+    // const data = {
+    //   'features': items,
+    //   'type': 'FeatureCollection',
+    // };
 
     const feature = new GeoJSON().readFeatures(items, {featureProjection: 'EPSG:3857'});
     this.source.addFeatures(feature);

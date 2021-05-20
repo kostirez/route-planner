@@ -10,11 +10,12 @@ import {ICircleFilter, IMyApiFilter} from '../../model/interfaces/ICircleFilter'
 export class RestAPIService {
 
   headers = new HttpHeaders()
-    .set('content-type', 'application/json; charset=utf-8')
-    .set('Access-Control-Allow-Origin', '*');
+    .set('Access-Control-Allow-Origin', '*')
+    .set('content-type', 'application/json; charset=utf-8');
 
 
-  url = 'https://localhost:3000/';
+
+  url = 'http://localhost:3000/';
 
   constructor(private http: HttpClient) {
   }

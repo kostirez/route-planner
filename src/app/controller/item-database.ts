@@ -84,7 +84,8 @@ export class ItemDatabase {
   }
 
   updateItems(): void {
-    // console.log('updating items', this.circleFilter);
+    console.log('updating items', this.circleFilter);
+
     if (this.filter != null && this.filter.name === this.layerName) {
       if (this.databaseName === 'golemio') {
         console.log('golemio');
@@ -97,10 +98,22 @@ export class ItemDatabase {
           });
       } else {
         console.log('api');
-        this.restAPIService.getItems(this.getMyAPIFilter(this.circleFilter), this.type)
-          .subscribe((items) => {
-            this.subject.next(items);
-          });
+        const data = {
+          'features': [],
+          'type': 'FeatureCollection',
+        };
+        if (this.filter.subnames.length !== 0) {
+          this.restAPIService.getItems(this.getMyAPIFilter(this.circleFilter), this.type)
+            .subscribe((items) => {
+
+              // @ts-ignore
+              data.features = items;
+
+              this.subject.next(data);
+            });
+        } else {
+          this.subject.next(data);
+        }
       }
     }
   }
