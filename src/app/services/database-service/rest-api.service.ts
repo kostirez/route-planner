@@ -10,9 +10,9 @@ import {ICircleFilter, IMyApiFilter} from '../../model/interfaces/ICircleFilter'
 export class RestAPIService {
 
   headers = new HttpHeaders()
-    .set('Access-Control-Allow-Origin', '*')
-    .set('content-type', 'application/json; charset=utf-8');
-
+    .set('Access-Control-Allow-Origin', 'http://localhost:3000')
+    .set('content-type', 'application/json; charset=utf-8')
+    .set('Access-Control-Allow-Headers', 'Access-Control-Allow-Origin, Content-Type, Accept, Accept-Language, Origin, User-Agent');
 
 
   url = 'http://localhost:3000/';
