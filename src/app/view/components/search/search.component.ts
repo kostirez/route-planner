@@ -79,7 +79,7 @@ export class SearchComponent implements OnInit {
   search(): void {
     console.log('mapMode;', this.mapMode);
     this.routePlanningService.findRoute(this.mapMode);
-    this.routePlanningService.findRoute('shareBike');
+    // this.routePlanningService.findRoute('shareBike');
     // this.routePlanningService.findRoute('sepcia...');
   }
 }
