@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GeoLocationService} from '../../../services/geo-location.service/geo-location.service';
 import {RoutePlanningService} from '../../../services/route-plannig-service/route-planning.service';
+import {SideMenuService} from '../side-menu/side-menu-service/side-menu.service';
 
 @Component({
   selector: 'app-search',
@@ -17,8 +18,11 @@ export class SearchComponent implements OnInit {
 
   to: string;
 
+  mapMode: string;
+
   constructor(private geoLocationService: GeoLocationService,
-              private routePlanningService: RoutePlanningService) {
+              private routePlanningService: RoutePlanningService,
+              private sideMenuService: SideMenuService) {
   }
 
   ngOnInit(): void {
@@ -29,6 +33,10 @@ export class SearchComponent implements OnInit {
     this.routePlanningService.getTo()
       .subscribe((to) => {
         this.to = to[0] + ', ' + to[1];
+      });
+    this.sideMenuService.getMapMode()
+      .subscribe((mapMode) => {
+        this.mapMode = mapMode;
       });
   }
 
@@ -69,6 +77,9 @@ export class SearchComponent implements OnInit {
   }
 
   search(): void {
-    this.routePlanningService.findRoute();
+    console.log('mapMode;', this.mapMode);
+    this.routePlanningService.findRoute(this.mapMode);
+    this.routePlanningService.findRoute('shareBike');
+    // this.routePlanningService.findRoute('sepcia...');
   }
 }

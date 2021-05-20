@@ -22,6 +22,8 @@ export class RoutePlanningService {
     this._to.next(value);
   }
 
+  private routeBox: Subject<boolean>;
+
   private _from: Subject<[number, number]>;
 
   private _to: Subject<[number, number]>;
@@ -32,15 +34,22 @@ export class RoutePlanningService {
   private toId: any;
   private fromId: any;
 
+  private currentTo: [number, number];
+  private currentFrom: [number, number];
+
+  private routeId: any;
+
   constructor(private olFuncService: OlFuncService,
               private restAPIService: RestAPIService) {
     this._from = new Subject<[number, number]>();
     this._to = new Subject<[number, number]>();
     this.initLayer();
     this.getFrom().subscribe((value) => {
+      this.currentFrom = value;
       this.updatePoint(this.fromId, value);
     });
     this.getTo().subscribe((value) => {
+      this.currentTo = value;
       this.updatePoint(this.toId, value);
     });
   }
@@ -49,6 +58,10 @@ export class RoutePlanningService {
     console.log('id', id);
     const featureToUpdate = this.source.getFeatureById(id);
     featureToUpdate.getGeometry().setCoordinates(fromLonLat(coords));
+  }
+
+  toggleRouteBox(): void {
+    this.routeBox.next(true);
   }
 
   initLayer(): void {
@@ -76,16 +89,29 @@ export class RoutePlanningService {
   }
 
   addRoute(routes): void {
+    const transportType = routes.features[0].properties.transportType;
+    this.source.getFeatures().forEach((feature) => {
+      if (transportType === feature.get('transportType')){
+        this.source.removeFeature(feature);
+      }
+    });
     const features = new GeoJSON().readFeatures(routes, {featureProjection: 'EPSG:3857'});
     this.source.addFeatures(features);
+    this.toggleRouteBox();
   }
 
-  findRoute(): void {
+  findRoute(transportType: string): void {
     console.log('geometry', this.source.getFeatureById(this.fromId).getGeometry());
     console.log('geometry', this.source.getFeatureById(this.toId).getGeometry());
-    this.restAPIService.getRoute()
+    this.restAPIService.getRoute(this.currentFrom, this.currentTo, transportType)
       .subscribe((routes) => {
-        this.addRoute(routes);
+        // this.source.clear();
+        const ret =
+          {
+            'type': 'FeatureCollection',
+            'features': routes
+          };
+        this.addRoute(ret);
       });
   }
 

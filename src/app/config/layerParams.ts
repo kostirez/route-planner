@@ -1,24 +1,24 @@
 import {ILayerParams, IMode} from '../model/interfaces/ILayerParams';
 
 export const mode: IMode[] = [
-  {
-    name: 'All',
-    layers: [
-      'Bike',
-      'CyclePath',
-      'BikeParking',
-      'Car',
-      'ParkingMachines',
-      'ParkingLot',
-      'PaidParking',
-      'ProhibitedParking',
-      'ZTP',
-      // 'streets',
-      'MHDStops',
-      'PIDLines',
-      // 'chodci'
-    ]
-  },
+  // {
+  //   name: 'All',
+  //   layers: [
+  //     'Bike',
+  //     'CyclePath',
+  //     'BikeParking',
+  //     'Car',
+  //     'ParkingMachines',
+  //     'ParkingLot',
+  //     'PaidParking',
+  //     'ProhibitedParking',
+  //     'ZTP',
+  //     // 'streets',
+  //     'MHDStops',
+  //     'PIDLines',
+  //     // 'chodci'
+  //   ]
+  // },
   {
     name: 'Bike',
     layers: [
@@ -40,7 +40,7 @@ export const mode: IMode[] = [
     ]
   },
   {
-    name: 'PIDLines',
+    name: 'PublicTransport',
     layers: [
       'MHDStops',
       'PIDLines'

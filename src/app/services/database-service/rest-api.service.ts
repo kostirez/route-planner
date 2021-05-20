@@ -10,9 +10,11 @@ import {ICircleFilter, IMyApiFilter} from '../../model/interfaces/ICircleFilter'
 export class RestAPIService {
 
   headers = new HttpHeaders()
-    .set('content-type', 'application/json; charset=utf-8');
+    .set('content-type', 'application/json; charset=utf-8')
+    .set('Access-Control-Allow-Origin', '*');
 
-  url = 'http://localhost:3000/';
+
+  url = 'https://localhost:3000/';
 
   constructor(private http: HttpClient) {
   }
@@ -28,51 +30,16 @@ export class RestAPIService {
     });
   }
 
-  getRoute(): Observable<any> {
-    const myObservable = of(
-    {
-      "type": "FeatureCollection",
-      "features": [
-        {
-          "type": "Feature",
-          "properties": {},
-          "geometry": {
-            "type": "LineString",
-            "coordinates": [
-              [
-                14.470367431640623,
-                50.07862503227565
-              ],
-              [
-                14.49697494506836,
-                50.07862503227565
-              ],
-              [
-                14.495086669921875,
-                50.06705670574863
-              ],
-              [
-                14.465045928955076,
-                50.06077558832056
-              ],
-              [
-                14.441184997558592,
-                50.06562424259453
-              ],
-              [
-                14.443073272705078,
-                50.07708274998269
-              ],
-              [
-                14.443759918212892,
-                50.084573370675564
-              ]
-            ]
-          }
-        }
-      ]
+  getRoute(from: [number, number], to: [number, number], transportType: string): Observable<any> {
+    let paramss = new HttpParams();
+    paramss = paramss.set('from', from[0] + ',' + from[1]);
+    paramss = paramss.set('to', to[0] + ',' + to[1]);
+    paramss = paramss.set('transportType', transportType);
+    console.log('getRoute', transportType);
+    return this.http.get<GeoJson<any>>(this.url + 'Graph', {
+      params: paramss,
+      headers: this.headers,
     });
-    return myObservable;
   }
 
 

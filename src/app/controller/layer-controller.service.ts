@@ -30,6 +30,11 @@ export class LayerControllerService {
               private restAPIService: RestAPIService,
               private sideMenuService: SideMenuService,
               private mapStateService: MapStateService) {
+    this.sideMenuService.getMapMode()
+      .subscribe(() => {
+        console.log('mapMode');
+        this.clearAll();
+      });
   }
 
   getLayer(name: string): Layer<any> {
@@ -53,6 +58,14 @@ export class LayerControllerService {
       this.layers.push(new Layer(parm, this.olFuncService, this.golemioService, this.restAPIService, this.sideMenuService, this.mapStateService));
     });
     console.log('layers are ready');
+  }
+
+  clearAll() {
+    if (this.layers) {
+      this.layers.forEach((layer) => {
+        layer.removeAll();
+      });
+    }
   }
 
   // filterDataInLayer(name: string, geoFilter: ICircleFilter): void {
@@ -85,7 +98,7 @@ export class LayerControllerService {
   //   return 100000 / this.mapZoom;
   // }
 
-  getLayerNameById(id): string{
+  getLayerNameById(id): string {
     return this.layers.find((layer) => layer.getOl_uid() === id).name;
   }
 }

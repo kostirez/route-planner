@@ -1,3 +1,3 @@
 export enum MapMode {
-  All = 0, BikeMode = 1, CarMode = 2, PublicTransportMode = 3
+  Bike = 0, Car = 1, PublicTransport = 2
 }

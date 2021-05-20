@@ -1,8 +1,8 @@
-<mat-button-toggle-group class="btn-group" [value]="mapType"
+<mat-button-toggle-group class="btn-group" [value]="mapMode"
                          name="fontStyle" aria-label="Font Style">
   <mat-button-toggle class="nav-btn"
                      *ngFor="let mode of modes; index as i"
-                     (click)="changeMapType(i)"
+                     (click)="changeMapMode(i)"
                      [value]="i">
     <img [src]="'./assets/pic/' + mode.name + '.png'">
   </mat-button-toggle>
@@ -10,7 +10,7 @@
 
 <div class="checkboxes">
   <!--  <h2>{{modes[mapType].name}}</h2>-->
-  <section class="example-section" *ngFor="let layerName of modes[mapType].layers">
+  <section class="example-section" *ngFor="let layerName of modes[mapMode].layers">
     <span class="example-list-section">
         <mat-checkbox class="example-margin"
                       [checked]="getCheckBoxTree(layerName).allComplete"

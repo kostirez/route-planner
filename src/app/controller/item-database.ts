@@ -130,7 +130,8 @@ export class ItemDatabase {
     //     items.features = [];
     //   // }
     // }
-    if (items.features && items.features[0].properties.company) {
+
+    if (items.features && items.features.length > 0 && items.features[0].properties.company) {
       console.log('items filt2');
       items.features.forEach((item) => {
         // console.log('items filt', item.properties.company);

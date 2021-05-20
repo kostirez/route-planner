@@ -24,7 +24,7 @@ export interface Task {
 })
 export class SideMenuComponent implements OnInit {
 
-  mapType: MapMode;
+  mapMode: MapMode;
 
   modes: any[];
 
@@ -35,17 +35,21 @@ export class SideMenuComponent implements OnInit {
   constructor(private layerControllerService: LayerControllerService,
               private sideMenuService: SideMenuService) {
     this.modes = mode;
+
     this.initCheckboxes();
-    // console.log('modes', this.modes);
+    this.mapMode = MapMode[MapMode[0]];
+    this.sideMenuService.changeMapMode(MapMode[0]);
   }
 
   ngOnInit(): void {
-    this.mapType = 1;
+    this.mapMode = 1;
   }
 
-  changeMapType(num: number): void {
-    this.mapType = MapMode[MapMode[num]];
-    // console.log('type: ', this.mapType);
+  changeMapMode(num: number): void {
+    this.clearFilter();
+    this.mapMode = MapMode[MapMode[num]];
+    this.sideMenuService.changeMapMode(MapMode[num]);
+    // console.log('type: ', this.mapMode);
   }
 
   initCheckboxes(): void {
@@ -84,6 +88,9 @@ export class SideMenuComponent implements OnInit {
 
   setAll(completed: boolean, name: string): void {
     const task = this.getCheckBoxTree(name);
+    if (task.allComplete === completed) {
+      return;
+    }
     task.allComplete = completed;
     if (task.subtasks == null) {
       return;
@@ -112,6 +119,23 @@ export class SideMenuComponent implements OnInit {
     }
     console.log('ret', ret);
     return ret;
+  }
+
+  clearFilter(): void {
+    console.log('map mode', MapMode[this.mapMode]);
+    const item = this.modes.find((m) => m.name === MapMode[this.mapMode]);
+    item.layers.forEach((name) => {
+
+      this.setAll(false, name);
+     
+      console.log('setAll', name);
+    });
+
+    // this.modes[this.mapMode].layers.forEach((layerName) => {
+    //   console.log('layerName:  ', this.mapMode, layerName);
+    //
+    // });
+
   }
 
   showSubtask(name: string): boolean {
