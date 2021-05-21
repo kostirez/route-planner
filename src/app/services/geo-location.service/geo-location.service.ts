@@ -23,7 +23,7 @@ export class GeoLocationService {
   private item: any;
 
   constructor(private olFuncService: OlFuncService) {
-    interval(5000).subscribe(() => {
+    interval(10000).subscribe(() => {
       this.updateLocation();
     });
     this.initItem();

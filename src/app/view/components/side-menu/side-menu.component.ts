@@ -3,7 +3,6 @@ import {MapMode} from '../../../model/map-mode.enum';
 import {mode, layersParams} from '../../../config/layerParams';
 import {ThemePalette} from '@angular/material/core';
 import {ILayerParams} from '../../../model/interfaces/ILayerParams';
-import {LayerControllerService} from '../../../controller/layer-controller.service';
 import {SideMenuService} from './side-menu-service/side-menu.service';
 import {IFilter, IItemsFilter} from '../../../model/interfaces/IItemsFilter';
 
@@ -32,8 +31,7 @@ export class SideMenuComponent implements OnInit {
 
   layersParams: ILayerParams[] = layersParams;
 
-  constructor(private layerControllerService: LayerControllerService,
-              private sideMenuService: SideMenuService) {
+  constructor(private sideMenuService: SideMenuService) {
     this.modes = mode;
 
     this.initCheckboxes();
@@ -127,7 +125,7 @@ export class SideMenuComponent implements OnInit {
     item.layers.forEach((name) => {
 
       this.setAll(false, name);
-     
+
       console.log('setAll', name);
     });
 

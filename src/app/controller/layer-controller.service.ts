@@ -68,35 +68,6 @@ export class LayerControllerService {
     }
   }
 
-  // filterDataInLayer(name: string, geoFilter: ICircleFilter): void {
-  //   this.getLayer(name).setData(geoFilter);
-  // }
-
-  // setMapState(zoom: number = this.mapZoom, center: [number, number] = this.mapCenter): void {
-  //   this.mapZoom = zoom;
-  //   this.mapCenter = center;
-  //   console.log('setMapState', this.mapZoom, this.mapCenter);
-  //   this.setFilters();
-  // }
-
-  // setItemsFilter(filter: IItemsFilter): void {
-  //   this.itemsFilter = filter;
-  //   console.log('filter', filter);
-  //   this.setFilters();
-  // }
-
-  // setFilters(): void {
-  //   this.layers.forEach((layer) => {
-  //     const filter = this.itemsFilter.filter
-  //       .find((f) => f.name === layer.name);
-  //     const circleFilter: ICircleFilter = {coordinates: this.mapCenter, radius: this.getRadius()};
-  //     layer.setFilter(filter, circleFilter);
-  //   });
-  // }
-  //
-  // getRadius(): number {
-  //   return 100000 / this.mapZoom;
-  // }
 
   getLayerNameById(id): string {
     return this.layers.find((layer) => layer.getOl_uid() === id).name;
