@@ -16,7 +16,8 @@ export class RestAPIService {
 
 
 
-  url = 'http://193.86.103.229:3000/';
+  // url = 'http://193.86.103.229:3000/';
+  url = 'http://localhost:3000/';
 
   constructor(private http: HttpClient) {
   }
@@ -37,7 +38,7 @@ export class RestAPIService {
     paramss = paramss.set('from', from[0] + ',' + from[1]);
     paramss = paramss.set('to', to[0] + ',' + to[1]);
     paramss = paramss.set('transportType', transportType);
-    console.log('getRoute', transportType);
+    // console.log('getRoute', transportType);
     return this.http.get<GeoJson<any>>(this.url + 'Graph', {
       params: paramss,
       headers: this.headers,

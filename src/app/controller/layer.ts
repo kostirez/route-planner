@@ -45,7 +45,6 @@ export class Layer<T> {
     this.itemDatabase = new ItemDatabase(golemioService, restAPIService, sideMenuService, mapStateService,
       this.params.searchUrl, this.params.database, this.name);
     this.itemDatabase.getItems().subscribe((items) => {
-      console.log('goisdugfoaiwugfoaiw', items);
       this.removeAll();
       this.addItems(items);
       // this.addItems(this.findNewItems(items));
@@ -64,13 +63,22 @@ export class Layer<T> {
         styles = this.olFuncService.getImage(this.name);
         break;
       case 'polygon':
-        styles = this.olFuncService.getPolygon();
+        styles = this.olFuncService.getPolygon('blue');
+        break;
+      case 'polygonRed':
+        styles = this.olFuncService.getPolygon('red');
         break;
       case 'line2':
         styles = this.olFuncService.getLine2();
         break;
       case 'line3':
         styles = this.olFuncService.getLine3();
+        break;
+      case 'line4':
+        styles = this.olFuncService.getLine4();
+        break;
+      case 'line5':
+        styles = this.olFuncService.getLine5();
         break;
     }
     this.vectorLayer = new VectorLayer({
@@ -99,7 +107,7 @@ export class Layer<T> {
   // }
 
   addItems(items: GeoJson<any>): void {
-    console.log('adding items', items);
+    // console.log('adding items', items);
     // const data = {
     //   'features': items,
     //   'type': 'FeatureCollection',
@@ -107,7 +115,7 @@ export class Layer<T> {
 
     const feature = new GeoJSON().readFeatures(items, {featureProjection: 'EPSG:3857'});
     this.source.addFeatures(feature);
-    console.log('add items: features', this.source.getFeatures().length);
+    // console.log('add items: features', this.source.getFeatures().length);
     // console.log('array geometry', this.source.getFeatures()[0].getGeometry().getCoordinates());
 
   }
@@ -118,7 +126,6 @@ export class Layer<T> {
     geoJson.features = [];
     items.features.forEach((feature) => {
       if (!this.isFeatureInSource(feature)) {
-        console.log('prifdaaaavam');
         geoJson.features.push(feature);
         // console.log('adddddddd');
       }
@@ -189,7 +196,7 @@ export class Layer<T> {
   }
 
   getOl_uid(): any {
-    console.log('vector', this.vectorLayer);
+    // console.log('vector', this.vectorLayer);
     return this.vectorLayer.ol_uid;
   }
 

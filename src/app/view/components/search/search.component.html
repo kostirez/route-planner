@@ -23,6 +23,10 @@
       <img class="position-img" (click)="switch()" [src]="'./assets/pic/back-and-forth.png'">
     </div>
   </div>
-  <button (click)="search()">{{'search' | translate}}</button>
 
+  <button class="search_btn" *ngIf="searching==false" (click)="search()">{{'search' | translate}}</button>
+  <p *ngIf="searching==true">{{'searching' | translate}}</p>
+  <p class="err-text" *ngIf="fromError">{{'fromError' | translate}}</p>
+  <p class="err-text" *ngIf="toError">{{'toError' | translate}}</p>
+  <p class="err-text" *ngIf="searchError">{{'searchError' | translate}}</p>
 </div>

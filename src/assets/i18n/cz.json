@@ -16,6 +16,10 @@
   "search": "Hledat",
   "from": "Z",
   "to": "Do",
+  "searching": "Hledání trasy...",
+  "fromError": "Špatně zadaný začátek cesty",
+  "toError": "Špatně zadaný konec cesty",
+  "searchError": "Trasa nenalezena",
   "route": {
     "plan": "Naplánovat trasu",
     "from": "odtud",

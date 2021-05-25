@@ -34,3 +34,27 @@
   }
 }
 
+
+
+/* Inline #3 | http://localhost:4200/ */
+
+.show-filter[_ngcontent-dtp-c79] {
+  background-color: antiquewhite;
+}
+
+/* Element | http://localhost:4200/ */
+
+.header-box > div:nth-child(1) {
+  margin: 0px 0px 15px;
+}
+
+.search_btn{
+  border-radius: 10px;
+  background-color: #a4c6a6;
+  padding: 5px 40px;
+}
+
+.err-text {
+  margin: 10px 0px 0px;
+  color: red;
+}

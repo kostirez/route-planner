@@ -20,12 +20,21 @@ export class SearchComponent implements OnInit {
 
   mapMode: string;
 
+  searching = false;
+
+  fromError = false;
+
+  toError = false;
+
+  searchError = false;
+
   constructor(private geoLocationService: GeoLocationService,
               private routePlanningService: RoutePlanningService,
               private sideMenuService: SideMenuService) {
   }
 
   ngOnInit(): void {
+
     this.routePlanningService.getFrom()
       .subscribe((from) => {
         this.from = from[0] + ', ' + from[1];
@@ -78,7 +87,23 @@ export class SearchComponent implements OnInit {
 
   search(): void {
     console.log('mapMode;', this.mapMode);
-    this.routePlanningService.findRoute(this.mapMode);
+    this.fromError = !this.from;
+    this.toError = !this.to;
+    if (this.fromError || this.toError) {
+      return;
+    }else{
+      this.searching = true;
+      this.searchError = false;
+      this.routePlanningService.findRoute(this.mapMode)
+        .then(() => {
+          this.searching = false;
+        })
+        .catch((e) => {
+          console.log('error', e);
+          this.searching = false;
+          this.searchError = true;
+        });
+    }
     // this.routePlanningService.findRoute('shareBike');
     // this.routePlanningService.findRoute('sepcia...');
   }

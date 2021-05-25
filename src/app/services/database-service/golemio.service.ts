@@ -26,10 +26,10 @@ export class GolemioService {
     Object.keys(filter).forEach((item) => {
       paramss = paramss.set(item, filter[item]);
     });
-    console.log('golemio, params', paramss);
-    console.log('golemio, header', this.headers);
-    console.log('golemio, type', type);
-    console.log('golemio, filter', filter);
+    // console.log('golemio, params', paramss);
+    // console.log('golemio, header', this.headers);
+    // console.log('golemio, type', type);
+    // console.log('golemio, filter', filter);
     return this.http.get<GeoJson<any>>(this.golemioUrl + type, {
       params: paramss,
       headers: this.headers,

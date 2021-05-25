@@ -22,7 +22,7 @@ export class OverlayBoxComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('undefined', this.overlayInfo);
+    // console.log('undefined', this.overlayInfo);
   }
 
   isDefined(): boolean {
@@ -40,7 +40,7 @@ export class OverlayBoxComponent implements OnInit {
 
   setFrom(): void {
     this.showBox.emit(false);
-    console.log('position', this.overlayInfo.position);
+    // console.log('position', this.overlayInfo.position);
     this.routePlanningService.from = this.overlayInfo.position;
   }
 }

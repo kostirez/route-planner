@@ -14,15 +14,13 @@ import {RestAPIService} from '../database-service/rest-api.service';
 export class RoutePlanningService {
 
   set from(value: [number, number]) {
-    console.log('set value', value);
+    // console.log('set value', value);
     this._from.next(value);
   }
 
   set to(value: [number, number]) {
     this._to.next(value);
   }
-
-  private routeBox: Subject<boolean>;
 
   private _from: Subject<[number, number]>;
 
@@ -55,13 +53,9 @@ export class RoutePlanningService {
   }
 
   updatePoint(id, coords): void {
-    console.log('id', id);
+    // console.log('id', id);
     const featureToUpdate = this.source.getFeatureById(id);
     featureToUpdate.getGeometry().setCoordinates(fromLonLat(coords));
-  }
-
-  toggleRouteBox(): void {
-    this.routeBox.next(true);
   }
 
   initLayer(): void {
@@ -75,8 +69,8 @@ export class RoutePlanningService {
     });
     this.fromId = this.createPoint('from', [undefined, undefined]);
     this.toId = this.createPoint('to', [undefined, undefined]);
-    console.log('from', this.fromId);
-    console.log('to', this.toId);
+    // console.log('from', this.fromId);
+    // console.log('to', this.toId);
   }
 
   createPoint(type: string, coords: [number, number]): any {
@@ -97,22 +91,24 @@ export class RoutePlanningService {
     });
     const features = new GeoJSON().readFeatures(routes, {featureProjection: 'EPSG:3857'});
     this.source.addFeatures(features);
-    this.toggleRouteBox();
   }
 
-  findRoute(transportType: string): void {
-    console.log('geometry', this.source.getFeatureById(this.fromId).getGeometry());
-    console.log('geometry', this.source.getFeatureById(this.toId).getGeometry());
-    this.restAPIService.getRoute(this.currentFrom, this.currentTo, transportType)
-      .subscribe((routes) => {
-        // this.source.clear();
-        const ret =
-          {
-            'type': 'FeatureCollection',
-            'features': routes
-          };
-        this.addRoute(ret);
-      });
+  findRoute(transportType: string): Promise<boolean> {
+    // console.log('geometry', this.source.getFeatureById(this.fromId).getGeometry());
+    // console.log('geometry', this.source.getFeatureById(this.toId).getGeometry());
+    return new Promise(resolve => {
+      this.restAPIService.getRoute(this.currentFrom, this.currentTo, transportType)
+        .subscribe((routes) => {
+          // this.source.clear();
+          const ret =
+            {
+              'type': 'FeatureCollection',
+              'features': routes
+            };
+          this.addRoute(ret);
+          resolve(true);
+        });
+    });
   }
 
   getFrom(): Subject<[number, number]> {

@@ -24,7 +24,7 @@ export class SideMenuService {
     return this.filterState;
   }
 
-    changeMapMode(mapType: string): void {
+  changeMapMode(mapType: string): void {
     this.mapMode.next(mapType);
   }
 

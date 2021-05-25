@@ -40,7 +40,7 @@ export class ItemDatabase {
     this.subject = new Subject();
     this.circleFilter = {radius: 0, coordinates: null};
     this.sideMenuService.getFilterState().subscribe((filter) => {
-      console.log('filter65', filter);
+      // console.log('filter65', filter);
       this.IFilterChange(filter);
     });
     this.mapStateService.getCoords().subscribe((coords) => {
@@ -78,26 +78,26 @@ export class ItemDatabase {
   }
 
   setFilter(circleFilter: ICircleFilter): void {
-    console.log('cir:', circleFilter);
+    // console.log('cir:', circleFilter);
     this.circleFilter = circleFilter;
     this.updateItems();
   }
 
   updateItems(): void {
-    console.log('updating items', this.circleFilter);
+    // console.log('updating items', this.circleFilter);
 
     if (this.filter != null && this.filter.name === this.layerName) {
       if (this.databaseName === 'golemio') {
-        console.log('golemio');
+        // console.log('golemio');
         this.golemioService.getItems(this.getGolemioFilter(this.circleFilter), this.type)
           .subscribe((items) => {
-            console.log('tady');
+            // console.log('tady');
             items = this.filtrate(items);
-            console.log('items from golemio', items);
+            // console.log('items from golemio', items);
             this.subject.next(items);
           });
       } else {
-        console.log('api');
+        // console.log('api');
         const data = {
           'features': [],
           'type': 'FeatureCollection',
@@ -136,8 +136,8 @@ export class ItemDatabase {
 
   private filtrate(items: GeoJson<any>): GeoJson<any> {
     const retArray = [];
-    console.log('ifilter', this.layerName);
-    console.log('ifilter', this.filter.name);
+    // console.log('ifilter', this.layerName);
+    // console.log('ifilter', this.filter.name);
     // if (this.filter.subnames.length === 0) {
     //   // if (this.filter.name !== this.layerName) {
     //     items.features = [];
@@ -145,7 +145,7 @@ export class ItemDatabase {
     // }
 
     if (items.features && items.features.length > 0 && items.features[0].properties.company) {
-      console.log('items filt2');
+      // console.log('items filt2');
       items.features.forEach((item) => {
         // console.log('items filt', item.properties.company);
         if (this.filter.subnames.includes(item.properties.company.name)) {
@@ -159,7 +159,7 @@ export class ItemDatabase {
         items.features = [];
       // }
     }
-    console.log('items filt2', items);
+    // console.log('items filt2', items);
     return items;
   }
 
@@ -171,7 +171,7 @@ export class ItemDatabase {
     if (filter.name !== this.layerName) {
       return;
     }
-    console.log('jsem tu', filter);
+    // console.log('jsem tu', filter);
     this.filter = filter;
     this.updateItems();
   }

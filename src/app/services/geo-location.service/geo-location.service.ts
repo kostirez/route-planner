@@ -48,7 +48,7 @@ export class GeoLocationService {
         navigator.geolocation.getCurrentPosition(position => {
           this.lat = position.coords.latitude;
           this.lng = position.coords.longitude;
-          console.log('position', position);
+          // console.log('position', position);
           resolve([this.lat, this.lng]);
         });
       });
@@ -84,14 +84,14 @@ export class GeoLocationService {
   }
 
   updateLayer(): void {
-    console.log('update position', this.source.getFeatures());
+    // console.log('update position', this.source.getFeatures());
     if (this.source.getFeatures().length !== 0){
-      console.log('not empty');
+      // console.log('not empty');
       const featureToUpdate = this.source.getFeatures()[0];
       featureToUpdate.getGeometry().setCoordinates(fromLonLat([this.lng, this.lat]));
     } else {
       const features = new GeoJSON().readFeatures(this.item, {featureProjection: 'EPSG:3857'});
-      console.log('empty ...features: ', features);
+      // console.log('empty ...features: ', features);
       this.source.addFeatures(features);
     }
   }

@@ -32,7 +32,7 @@ export class LayerControllerService {
               private mapStateService: MapStateService) {
     this.sideMenuService.getMapMode()
       .subscribe(() => {
-        console.log('mapMode');
+        // console.log('mapMode');
         this.clearAll();
       });
   }

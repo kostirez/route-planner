@@ -16,6 +16,9 @@
   "search": "Search",
   "from": "From",
   "to": "To",
+  "searching": "Looking for the best route",
+  "fromError": "error",
+  "toError": "error",
   "route": {
     "plan": "Plan route",
     "from": "From here",

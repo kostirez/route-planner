@@ -15,10 +15,10 @@ export class OlFuncService {
   getVectorSource(source: GeoJson<any>): VectorSource {
     let features;
     if (source.features.length !== 0) {
-      console.log('source', source);
+      // console.log('source', source);
       features = new GeoJSON().readFeatures(source, {featureProjection: 'EPSG:3857'});
     }
-    console.log('fetures: ', features);
+    // console.log('fetures: ', features);
     const vectorSource = new VectorSource({
       features: features
     });
@@ -65,15 +65,15 @@ export class OlFuncService {
     });
   }
 
-  getPolygon(): any {
+  getPolygon(color: string): any {
     return new Style({
       stroke: new Stroke({
-        color: 'blue',
+        color: color,
         lineDash: [4],
         width: 3,
       }),
       fill: new Fill({
-        color: 'rgba(0, 0, 255, 0.1)',
+        color: 'rgb(174,175,191)',
       }),
     });
   }
@@ -91,6 +91,22 @@ export class OlFuncService {
     return new Style({
       stroke: new Stroke({
         color: 'purple',
+        width: 2,
+      }),
+    });
+  }
+  getLine4(): any {
+    return new Style({
+      stroke: new Stroke({
+        color: 'braun',
+        width: 2,
+      }),
+    });
+  }
+  getLine5(): any {
+    return new Style({
+      stroke: new Stroke({
+        color: 'yellow',
         width: 2,
       }),
     });

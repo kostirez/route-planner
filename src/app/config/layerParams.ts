@@ -36,14 +36,15 @@ export const mode: IMode[] = [
       'PaidParking',
       'ProhibitedParking',
       'ZTP',
-      'streets'
     ]
   },
   {
     name: 'PublicTransport',
     layers: [
       'MHDStops',
-      'PIDLines'
+      'MetroLines',
+      'TramLines',
+      'BusLines'
     ]
   },
 ];
@@ -110,7 +111,7 @@ export const layersParams: ILayerParams[] = [
     database: 'myApi',
     searchUrl: 'ZakazStani',
     subnames: [],
-    layerType: 'polygon',
+    layerType: 'polygonRed',
     info: []
   },
   {
@@ -124,15 +125,39 @@ export const layersParams: ILayerParams[] = [
   {
     name: 'PIDLines',
     database: 'myApi',
-    searchUrl: 'typ',
+    searchUrl: 'PIDLines',
     subnames: ['metro', 'tram', 'bus'],
     layerType: 'line',
     info: []
   },
   {
+    name: 'MetroLines',
+    database: 'myApi',
+    searchUrl: 'metro',
+    subnames: [],
+    layerType: 'line3',
+    info: []
+  },
+  {
+    name: 'TramLines',
+    database: 'myApi',
+    searchUrl: 'tram',
+    subnames: [],
+    layerType: 'line4',
+    info: []
+  },
+  {
+    name: 'BusLines',
+    database: 'myApi',
+    searchUrl: 'bus',
+    subnames: [],
+    layerType: 'line5',
+    info: []
+  },
+  {
     name: 'MHDStops',
     database: 'myApi',
-    searchUrl: 'null',
+    searchUrl: 'MHDStops',
     subnames: [],
     layerType: 'point',
     info: []
